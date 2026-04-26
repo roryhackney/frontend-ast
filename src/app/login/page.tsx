@@ -1,13 +1,10 @@
-"use strict";
-import Button from "@/components/Button";
+import LoginForm from "@/components/LoginForm";
 
 export default function Login() {
   return (
       <main>
         <h1>Log In</h1>
-        <form>
-            <Button/>
-        </form>
+        <LoginForm/>
       </main>
   );
 }
