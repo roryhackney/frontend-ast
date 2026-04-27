@@ -22,15 +22,15 @@ async function stubApi(shouldPass: boolean): Promise<MyJson> {
 
 export default function LoginForm() {
     //expected by useActionState, returns the form error message if any after calling login API
-    const submitHandler = async function (prevState: any, formData: any) {
+    const submitHandler = async function (prevState: String | null, formData: FormData) {
         const name = formData.get('Username');
-        console.log(name);
         const pass = formData.get("Password");
-        console.log(pass);
+        console.log({name, pass}, "!");
         const response = await stubApi(true);
         if (response.success === true) {
             console.log("Success");
             // redirect("/path");
+            return null;
         } else {
             console.log("Failure");
             return "Invalid username or password";
