@@ -4,47 +4,59 @@ import TextInput from "./TextInput";
 import Button from "./Button";
 import { useActionState } from "react";
 
-type MyJson = {
-    "success": boolean
-}
-
-async function stubApi(shouldPass: boolean): Promise<MyJson> {
-
-    return new Promise(resolve => {
-        if (shouldPass) {
-            resolve({"success": true});
-        } else {
-            //could also reject() and do a try catch in handleSubmit - may need to for actual fetch()
-            resolve({"success": false});
-        }
-    });
-}
-
 export default function LoginForm() {
+    type loginProps = {
+        username: string,
+        password: string
+    };
+    
     //expected by useActionState, returns the form error message if any after calling login API
     const submitHandler = async function (prevState: String | null, formData: FormData) {
-        const name = formData.get('Username');
-        const pass = formData.get("Password");
-        console.log({name, pass}, "!");
-        const response = await stubApi(true);
-        if (response.success === true) {
-            console.log("Success");
-            // redirect("/path");
-            return null;
+        const username = `${formData.get('Username')}`;
+        const password = `${formData.get("Password")}`;
+        console.log(formData);
+        console.log({username, password}, "!");
+        let res = {status: 500};
+        try {
+            const body: BodyInit = JSON.stringify({
+                username: username, password: password
+            });
+            res = await fetch('http://localhost:5173/login', { //backend should be running on 5173 for this to work
+                method: 'POST',
+                body
+            });
+        } catch (err) {
+            console.log("Fetch error:", err);
+        }
+        if (res && res.status) {
+            if (res.status === 200) {
+                console.log("Success");
+                //redirect('/path');
+                return null;
+            } else if (res.status === 401) {
+                console.log("Invalid username or password");
+                return "Invalid username or password";
+            } else if (res.status === 500) {
+                console.log("Application error occurred");
+                return "Application error occurred";
+            } else {
+                console.log("Unknown error");
+                return "Unknown error";
+            }
         } else {
-            console.log("Failure");
-            return "Invalid username or password";
+            console.log("API is currently not working, check that it's running on port 5000");
+            return "API is currently not working, check that it's running on port 5000";
         }
     }
 
     const [error, submitAction] = useActionState(submitHandler, null);
 
-    return (
+    return (<>
         <form action={submitAction}>
             <TextInput label={"Username"} id={"username"}/>
             <TextInput label={"Password"} id={"password"}/>
             {error && <span>{error}</span>}
             <Button/>
         </form>
-    );
+    </>);
 }
