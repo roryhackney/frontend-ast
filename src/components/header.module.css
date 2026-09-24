@@ -1,0 +1,10 @@
+.header {
+    background-color: goldenrod;
+}
+
+.nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(394px, 1fr));
+    justify-content: center;
+    align-items: center;
+}

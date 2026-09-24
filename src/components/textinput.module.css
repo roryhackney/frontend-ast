@@ -1,0 +1,12 @@
+.label {
+    font-weight: bold;
+    display: block;
+    font-size: 1.125rem;
+}
+
+.input {
+    border-radius: 25px;
+    border-color: darkblue;
+    padding: 5px;
+    margin: 5px 0 25px 0;
+}

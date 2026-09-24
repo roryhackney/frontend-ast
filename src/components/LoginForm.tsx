@@ -3,6 +3,7 @@
 import TextInput from "./TextInput";
 import Button from "./Button";
 import { useActionState } from "react";
+import classes from './loginform.module.css';
 
 export default function LoginForm() {
     type loginProps = {
@@ -52,7 +53,7 @@ export default function LoginForm() {
     const [error, submitAction] = useActionState(submitHandler, null);
 
     return (<>
-        <form action={submitAction}>
+        <form className={classes.form} action={submitAction}>
             <TextInput label={"Username"} id={"username"}/>
             <TextInput label={"Password"} id={"password"}/>
             {error && <span>{error}</span>}
