@@ -6,7 +6,20 @@
 
 .input {
     border-radius: 25px;
-    border-color: darkblue;
+    border: 1px solid var(--black);
     padding: 5px;
     margin: 5px 0 25px 0;
+    width: 100%;
+    max-width: 700px;
+}
+
+.input:focus {
+    outline: 2px solid white;
+    border: 2px solid var(--light);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    .input {
+        border-color: var(--white);
+    }
 }

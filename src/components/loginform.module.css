@@ -1,7 +1,14 @@
 .form {
-    padding: 25px;
+    padding: 50px;
     width: 100%;
-    max-width: 500px;
-    border: 2px solid red;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 15px auto;
+    background-color: var(--off-white);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .form {
+    background-color: var(--dark);
+    color: var(--white);
+  }
 }
