@@ -6,6 +6,12 @@
     background-color: var(--off-white);
 }
 
+.error {
+  color: #FF737F;
+  display: block;
+  text-align: center;
+}
+
 @media screen and (prefers-color-scheme: dark) {
   .form {
     background-color: var(--dark);

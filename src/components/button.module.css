@@ -1,10 +1,18 @@
 .button {
+    --button-light: #FFD8E6;
+    --button-dark: #F186AD;
     padding: 5px 10px;
-    background-color: var(--light);
+    background-color: #FFB4CF;
     color: var(--black);
     border-radius: 2px;
     border-width: 5px;
     border-style: solid;
-    border-color: var(--off-white) var(--medium) var(--medium) var(--off-white);
+    border-color: var(--button-light) var(--button-dark) var(--button-dark) var(--button-light);
     font-size: 1.125rem;
+    margin: 0 auto;
+    display: block;
+}
+
+.button:active {
+    border-color: var(--button-dark) var(--button-light) var(--button-light) var(--button-dark);
 }

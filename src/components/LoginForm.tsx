@@ -29,24 +29,19 @@ export default function LoginForm() {
         } catch (err) {
             console.log("Fetch error:", err);
         }
-        if (res && res.status) {
-            if (res.status === 200) {
-                console.log("Success");
-                //redirect('/path');
-                return null;
-            } else if (res.status === 401) {
-                console.log("Invalid username or password");
-                return "Invalid username or password";
-            } else if (res.status === 500) {
-                console.log("Application error occurred");
-                return "Application error occurred";
-            } else {
-                console.log("Unknown error");
-                return "Unknown error";
-            }
+        if (res.status === 200) {
+            console.log("Success");
+            //redirect('/path');
+            return null;
+        } else if (res.status === 401) {
+            console.log("Invalid username or password");
+            return "Invalid username or password";
+        } else if (res.status === 500) {
+            console.log("Application error occurred");
+            return "Application error occurred";
         } else {
-            console.log("API is currently not working, check that it's running on port 5000");
-            return "API is currently not working, check that it's running on port 5000";
+            console.log("Unknown error");
+            return "Unknown error";
         }
     }
 
@@ -54,9 +49,9 @@ export default function LoginForm() {
 
     return (<>
         <form className={classes.form} action={submitAction}>
+            {error && <span className={classes.error}>{error}</span>}
             <TextInput label={"Username"} id={"username"}/>
             <TextInput label={"Password"} id={"password"}/>
-            {error && <span>{error}</span>}
             <Button/>
         </form>
     </>);
