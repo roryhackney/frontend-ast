@@ -29,19 +29,16 @@ export default function LoginForm() {
         } catch (err) {
             console.log("Fetch error:", err);
         }
-        if (res.status === 200) {
-            console.log("Success");
-            //redirect('/path');
-            return null;
-        } else if (res.status === 401) {
-            console.log("Invalid username or password");
-            return "Invalid username or password";
-        } else if (res.status === 500) {
-            console.log("Application error occurred");
-            return "Application error occurred";
-        } else {
-            console.log("Unknown error");
-            return "Unknown error";
+
+        switch(res.status) {
+            case 200: {
+                console.log("Login Success");
+                return null;
+            }
+            case 401: return "Invalid username or password";
+            case 429: return "Out of attempts, try again later";
+            case 500: return "Application error occurred";
+            default: return "Unknown error";
         }
     }
 
@@ -52,7 +49,7 @@ export default function LoginForm() {
             {error && <span className={classes.error}>{error}</span>}
             <TextInput label={"Username"} id={"username"}/>
             <TextInput label={"Password"} id={"password"}/>
-            <Button/>
+            <Button label="Log In"/>
         </form>
     </>);
 }
